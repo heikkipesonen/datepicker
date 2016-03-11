@@ -1,6 +1,7 @@
 class MainController {
-  constructor () {
+  constructor ($scope) {
     'ngInject';
+    $scope.pickerModel = new Date();
   }
 
 }

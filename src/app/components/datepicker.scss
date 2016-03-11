@@ -1,0 +1,88 @@
+$date-picker-cell-size: 50px !default;
+$date-picker-cell-border: #ddd !default;
+$date-picker-cell-hover-color: rgba(#221818, 0.81) !default;
+$date-picker-cell-hover-background: rgba(#ffffff, 0.18) !default;
+$date-picker-cell-selected-background: rgba(#ffffff, 0.43) !default;
+$date-picker-cell-selected-color: rgb(255, 255, 255) !default;
+$date-picker-title-bar-background: rgb(210, 53, 53) !default;
+$date-picker-title-bar-color: rgb(255, 255, 255) !default;
+$date-picker-gutter-width: 16px !default;
+$date-picker-cells-wrapper-background: rgb(199, 69, 69) !default;
+
+
+.date-picker{
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
+
+  font-family: helvetica neue;
+
+  .date-picker-controls{
+    color: $date-picker-title-bar-color;
+    background-color: $date-picker-title-bar-background;
+  }
+
+  .date-picker-row{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .date-picker-flex{
+    flex: 1;
+  }
+
+  .date-picker-display{
+    font-size: 16pt;
+    font-weight: 200;
+    text-align: center;
+    margin: 0;
+    line-height: $date-picker-cell-size;
+  }
+
+  .date-picker-button{
+    outline: none;
+    border: none;
+    margin: 0;
+    padding: $date-picker-gutter-width / 2;
+    background-color: transparent;
+    width: $date-picker-cell-size;
+    height: $date-picker-cell-size;
+    transition: 0.1s;
+    transition-timing-function: ease-out;
+    cursor: pointer;
+
+    &:hover{
+      background-color: rgba(255,255,255,0.2);
+    }
+  }
+
+
+
+  .date-picker-cells-wrapper{
+    background-color: $date-picker-cells-wrapper-background;
+  }
+
+  .date-picker-cell{
+    display: inline-block;
+    width: $date-picker-cell-size;
+    height: $date-picker-cell-size;
+    line-height: $date-picker-cell-size;
+    text-align: center;
+    vertical-align: top;
+    transition: 0.1s;
+    transition-timing-function: ease-out;
+    cursor: pointer;
+    border-radius: 50%;
+
+    &:hover{
+      background-color: $date-picker-cell-hover-background;
+      color: $date-picker-cell-hover-color;
+    }
+
+    &.date-picker-cell-selected{
+      color: $date-picker-cell-selected-color;
+      background-color: $date-picker-cell-selected-background;
+    }
+  }
+}

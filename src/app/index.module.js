@@ -1,6 +1,11 @@
-/* global malarkey:false, toastr:false, moment:false */
 import config from './index.config';
+
+import runBlock from './index.run';
+import MainController from './main/main.controller';
+import {DatePickerDirective} from './components/DatePicker';
 
 angular.module('DatePicker', ['ngAnimate'])
   .config(config)
-  .run(runBlock)
+  .controller('MainController', MainController)
+  .directive('datePicker', DatePickerDirective)
+  .run(runBlock);
