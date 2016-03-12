@@ -1,5 +1,5 @@
 $date-picker-cell-size: 40px !default;
-$date-picker-title-size: 50px !default;
+$date-picker-title-size: 150px !default;
 $date-picker-footer-size: $date-picker-title-size !default;
 $date-picker-background: rgb(224, 224, 224) !default;
 $date-picker-cell-hover-color: rgba(#221818, 0.81) !default;
@@ -135,7 +135,7 @@ $date-picker-day-name-cell-height: 30px;
   }
 
   .date-picker-display{
-    font-size: 16pt;
+    font-size: 26pt;
     font-weight: 200;
     text-align: center;
     margin: 0;
@@ -148,7 +148,7 @@ $date-picker-day-name-cell-height: 30px;
     margin: 0;
     padding: $date-picker-gutter-width / 2 $date-picker-gutter-width;
     background-color: transparent;
-    min-width: $date-picker-title-size;
+    min-width: $date-picker-cell-size;
     height: $date-picker-title-size;
     transition: 0.1s;
     transition-timing-function: ease-out;
@@ -186,6 +186,7 @@ $date-picker-day-name-cell-height: 30px;
     }
 
     &.date-picker-cell-selected{
+      box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
       color: $date-picker-cell-selected-color;
       background-color: $date-picker-cell-selected-background;
 
