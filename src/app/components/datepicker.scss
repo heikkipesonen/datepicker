@@ -35,6 +35,10 @@ $date-picker-day-name-cell-height: 30px;
     background-color: $date-picker-footer-bar-background;
   }
 
+  .date-picker-flex{
+    flex: 1;
+  }
+
   .date-picker-row{
     display: flex;
     flex-direction: row;

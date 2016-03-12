@@ -1,6 +1,5 @@
 import config from './index.config';
 
-import runBlock from './index.run';
 import MainController from './main/main.controller';
 import {DatePickerDirective} from './components/DatePicker';
 import {DatePickerDialogService} from './components/DatePickerDialog';
@@ -11,5 +10,4 @@ angular.module('DatePicker', ['ngAnimate'])
   .controller('MainController', MainController)
   .directive('datePicker', DatePickerDirective)
   .directive('timePicker', TimePickerDirective)
-  .service('DatePickerDialogService', DatePickerDialogService)
-  .run(runBlock);
+  .service('DatePickerDialogService', DatePickerDialogService);

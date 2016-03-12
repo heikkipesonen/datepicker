@@ -27,7 +27,6 @@ export class DatePickerController {
     let currentWeek = getWeek();
     let month = [];
 
-
     let firstWeekDayIndexOfMonth = DAY_ORDER[model.getDay()];
     let fillModel = new Date(model.getTime());
 
@@ -101,6 +100,8 @@ export function DatePickerDirective() {
     scope: {
       labelComplete: '@?',
       displayFormat: '@?',
+      complete: '&?',
+      cancel: '&?',
       ngModel: '='
     },
     controller: DatePickerController,
@@ -124,18 +125,23 @@ export function DatePickerDirective() {
                 {{::day}}
               </div>
             </div>
-            <div class="date-picker-week date-picker-cell-row" ng-repeat="week in calendar track by $index">
+            <div class="date-picker-week date-picker-cell-row" ng-repeat="week in ::calendar">
               <div class="date-picker-day date-picker-cell"
                 ng-class="{
                   'date-picker-cell-selected' : picker.isSelectedDate(day),
                   'date-picker-cell-another-month' : !picker.isCurrentMonth(day)
                 }"
                 ng-click="picker.setDate(day)"
-                ng-repeat="day in week track by $index">
-                {{day.getDate()}}
+                ng-repeat="day in ::week">
+                {{::day.getDate()}}
               </div>
             </div>
           </div>
+        </div>
+        <div class="date-picker-footer date-picker-row" ng-if="picker.cancel || picker.complete">
+          <button class="date-picker-button" ng-if="picker.cancel" ng-click="picker.cancel({date: picker.ngModel})">Cancel</button>
+          <span class="date-picker-flex"></span>
+          <button class="date-picker-button" ng-if="picker.complete" ng-click="picker.complete({date: picker.ngModel})">Done</button>
         </div>
       </div>
     `
