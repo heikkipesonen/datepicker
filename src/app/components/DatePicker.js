@@ -1,11 +1,18 @@
 const DAY_ORDER = [6,0,1,2,3,4,5];
+const DAY_NAMES = ['Ma','Ti','Ke','To','Pe','La','Su'];
 
 export class DatePickerController {
 
   constructor($scope) {
     'ngInject';
 
+
+    this.dayNames = DAY_NAMES;
+
+    let lastValue = 0;
     $scope.$watch(()=> this.ngModel.getMonth() + '' + this.ngModel.getFullYear(), () => {
+        this.direction = this.ngModel.getTime() > lastValue ? 'picker-direction-forward' : 'picker-direction-back';
+        lastValue = this.ngModel.getTime();
         this.month = [this.buildMonth(this.ngModel)];
     });
   }
@@ -71,19 +78,15 @@ export class DatePickerController {
   }
 
   nextMonth(){
-    this.direction = 'picker-direction-forward';
     this.ngModel.setMonth(this.ngModel.getMonth()+1);
   }
 
   prevMonth(){
-    this.direction = 'picker-direction-back';
     this.ngModel.setMonth(this.ngModel.getMonth()-1);
   }
 
   setDate(day) {
     if (day){
-      this.direction = day > this.ngModel ? 'picker-direction-forward' : 'picker-direction-back';
-
       this.ngModel.setDate(day.getDate());
       this.ngModel.setMonth(day.getMonth());
       this.ngModel.setFullYear(day.getFullYear());
@@ -96,6 +99,7 @@ export function DatePickerDirective() {
     restrict: 'E',
     replace: true,
     scope: {
+      labelComplete: '@?',
       displayFormat: '@?',
       ngModel: '='
     },
@@ -112,8 +116,14 @@ export function DatePickerDirective() {
           </div>
           <button class="date-picker-button" ng-click="picker.nextMonth()"></button>
         </div>
+
         <div class="date-picker-cells-wrapper" ng-class="picker.direction">
           <div class="date-picker-calendar" ng-repeat="calendar in picker.month">
+            <div class="date-picker-day-names date-picker-cell-row">
+              <div class="date-picker-day-name-cell" ng-repeat="day in ::picker.dayNames">
+                {{::day}}
+              </div>
+            </div>
             <div class="date-picker-week date-picker-cell-row" ng-repeat="week in calendar track by $index">
               <div class="date-picker-day date-picker-cell"
                 ng-class="{

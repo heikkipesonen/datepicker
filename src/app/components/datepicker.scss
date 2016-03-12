@@ -1,5 +1,6 @@
 $date-picker-cell-size: 40px !default;
 $date-picker-title-size: 50px !default;
+$date-picker-footer-size: $date-picker-title-size !default;
 $date-picker-background: rgb(224, 224, 224) !default;
 $date-picker-cell-hover-color: rgba(#221818, 0.81) !default;
 $date-picker-cell-hover-background: rgba(#ffffff, 0.44) !default;
@@ -8,10 +9,13 @@ $date-picker-cell-selected-color: rgb(255, 29, 29) !default;
 $date-picker-cell-selected-hover-color: rgb(249, 26, 26) !default;
 $date-picker-title-bar-background: rgb(210, 53, 53) !default;
 $date-picker-title-bar-color: rgb(255, 255, 255) !default;
+$date-picker-footer-bar-background: rgb(210, 53, 53) !default;
+$date-picker-footer-bar-color: rgb(255, 255, 255) !default;
 $date-picker-gutter-width: 16px !default;
 $date-picker-cell-disabled-color: rgb(125, 125, 125) !default;
 $date-picker-cell-disabled-background: transparent !default;
-
+$date-picker-button-color: rgb(255, 255, 255);
+$date-picker-day-name-cell-height: 30px;
 
 .date-picker{
   position: absolute;
@@ -19,11 +23,16 @@ $date-picker-cell-disabled-background: transparent !default;
   left: 50px;
 
   box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
-
+  background-color: $date-picker-background;
 
   .date-picker-title{
     color: $date-picker-title-bar-color;
     background-color: $date-picker-title-bar-background;
+  }
+
+  .date-picker-footer{
+    color: $date-picker-footer-bar-color;
+    background-color: $date-picker-footer-bar-background;
   }
 
   .date-picker-row{
@@ -101,18 +110,18 @@ $date-picker-cell-disabled-background: transparent !default;
     position: relative;
     overflow: hidden;
     padding: $date-picker-gutter-width/2;
-    background-color: $date-picker-background;
 
-    height: 6 * $date-picker-cell-size;
+
+    height: 6 * $date-picker-cell-size + $date-picker-day-name-cell-height;
     width: 7 * $date-picker-cell-size;
 
 
     .date-picker-calendar{
       position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
+      top: $date-picker-gutter-width/2;
+      left: $date-picker-gutter-width/2;
+      bottom: $date-picker-gutter-width/2;
+      right: $date-picker-gutter-width/2;
 
       display: flex;
       justify-content: center;
@@ -140,10 +149,19 @@ $date-picker-cell-disabled-background: transparent !default;
     transition: 0.1s;
     transition-timing-function: ease-out;
     cursor: pointer;
+    color: $date-picker-button-color;
+
+    &.date-picker-button-full{
+      width: 100%;
+    }
 
     &:hover{
       background-color: rgba(255,255,255,0.2);
     }
+  }
+
+  .date-picker-cell-row{
+    flex-direction: row;
   }
 
   .date-picker-cell{
@@ -181,4 +199,16 @@ $date-picker-cell-disabled-background: transparent !default;
       background-color: $date-picker-cell-disabled-background;
     }
   }
+  .date-picker-day-names{
+    display: flex;
+    font-size: 10pt;
+    opacity: 0.5;
+
+    .date-picker-day-name-cell{
+      flex: 1;
+      text-align: center;
+      line-height: $date-picker-day-name-cell-height;
+    }
+  }
+
 }

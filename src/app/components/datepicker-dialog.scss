@@ -1,0 +1,68 @@
+.date-picker-dialog-container{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .date-picker{
+    position: relative;
+    left: auto;
+    top: auto;;
+  }
+
+  &.ng-animate{
+    transition: 0.3s;
+    transition-timing-function: ease-in-out;
+    .date-picker{
+      transition-delay: 0.1s;
+      transition: 0.2s;
+    }
+  }
+
+  &.ng-enter{
+    opacity: 0;
+    .date-picker{
+      opacity: 0;
+      transform: scale3d(0,0,0);
+    }
+  }
+
+  &.ng-enter-active{
+    opacity: 1;
+    .date-picker{
+      opacity: 1;
+      transform: scale3d(1,1,1);
+    }
+  }
+  &.ng-leave{
+    opacity: 1;
+    .date-picker{
+      opacity: 1;
+      transform: scale3d(1,1,1);
+    }
+  }
+
+  &.ng-leave-active{
+    opacity: 0;
+    .date-picker{
+      opacity: 0;
+      transform: scale3d(0,0,0);
+    }
+  }
+
+
+  .date-picker-dialog-overlay{
+    position: absolute;;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.3);
+  }
+}
