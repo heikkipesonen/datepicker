@@ -15,8 +15,8 @@ $date-picker-cell-disabled-background: transparent !default;
 
 .date-picker{
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50px;
+  left: 50px;
 
   box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
 
@@ -37,6 +37,7 @@ $date-picker-cell-disabled-background: transparent !default;
 
   .date-picker-calendar{
     &.ng-animate{
+      transform: translate3d(0, 0, 0);
       transition: 0.3s;
       transition-timing-function: ease-in-out;
     }

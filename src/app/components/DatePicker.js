@@ -96,7 +96,7 @@ export function DatePickerDirective() {
     restrict: 'E',
     replace: true,
     scope: {
-      displayFormat: '=?',
+      displayFormat: '@?',
       ngModel: '='
     },
     controller: DatePickerController,
