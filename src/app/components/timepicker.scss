@@ -1,18 +1,20 @@
-$time-picker-background: rgb(25, 98, 221);
+$time-picker-background: rgb(182, 182, 182);
 
 $time-picker-wheel-size: 250px;
-$time-picker-wheel-step: 70px;
+$time-picker-wheel-step: 80px;
 $time-picker-title-height: 50px;
 
 $time-picker-title-color: rgb(255, 255, 255);
 $time-picker-title-background: rgb(83, 137, 218);
 
-$time-picker-hours-wheel-background: rgb(76, 184, 231);
-$time-picker-minutes-wheel-background: rgb(24, 22, 150);
+$time-picker-hours-wheel-background: rgb(214, 214, 214);
+$time-picker-minutes-wheel-background: rgb(231, 231, 231);
+
+$time-picker-indicator-size: 30px;
 
 .time-picker{
   position: absolute;
-  top:0;
+  top:50px;
   left: 500px;
   box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
 
@@ -37,6 +39,8 @@ $time-picker-minutes-wheel-background: rgb(24, 22, 150);
     line-height: $time-picker-title-height;
   }
 
+
+
   .time-picker-hours, .time-picker-minutes{
     position: absolute;
     border-radius: 50%;
@@ -47,18 +51,31 @@ $time-picker-minutes-wheel-background: rgb(24, 22, 150);
 
   .time-picker-hours{
     background-color: $time-picker-hours-wheel-background;
-    margin-left: - $time-picker-wheel-size / 2;
-    margin-top: - $time-picker-wheel-size / 2;
-    width: $time-picker-wheel-size;
-    height: $time-picker-wheel-size;
-  }
-
-  .time-picker-minutes{
-    background-color: $time-picker-minutes-wheel-background;
     margin-left: - ($time-picker-wheel-size - $time-picker-wheel-step) / 2;
     margin-top: - ($time-picker-wheel-size - $time-picker-wheel-step)/ 2;
 
     width: $time-picker-wheel-size - $time-picker-wheel-step;
     height: $time-picker-wheel-size - $time-picker-wheel-step;
+    box-shadow: inset 0px 0px 20px 0px rgba(0,0,0,0.7);
+  }
+
+  .time-picker-minutes{
+    margin-left: - $time-picker-wheel-size / 2;
+    margin-top: - $time-picker-wheel-size / 2;
+    width: $time-picker-wheel-size;
+    height: $time-picker-wheel-size;
+    background-color: $time-picker-minutes-wheel-background;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+  }
+
+  .time-picker-indicator{
+    position: absolute;
+    top: $time-picker-wheel-step/4 - $time-picker-indicator-size/2;
+    left:50%;
+    margin-left: -$time-picker-indicator-size/2;
+    border-radius: 50%;
+    width: $time-picker-indicator-size;
+    height: $time-picker-indicator-size;
+    background-color: rgb(222, 27, 27);
   }
 }

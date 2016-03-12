@@ -40,7 +40,8 @@ export class DatePickerDialogService {
 
 
     let element = this.$compile(TEMPLATE)(scope);
-    element[0].style.zIndex = this.currentZIndex + 1;
+    this.currentZIndex++
+    element[0].style.zIndex = this.currentZIndex;
 
     this.dialogs.push(element);
     this.$animate.enter(element, this._rootElement, this._rootElement.lastChild);
