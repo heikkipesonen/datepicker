@@ -1,7 +1,7 @@
 const MINUTE_STEP = 5;
 
 export class TimePickerController {
-  constructor($scope){
+  constructor(){
     'ngInject';
 
     this.minutes = Array(60/MINUTE_STEP).fill(false).map((value, index)=> index * MINUTE_STEP);

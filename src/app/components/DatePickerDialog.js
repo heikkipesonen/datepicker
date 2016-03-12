@@ -13,13 +13,15 @@ const TIME_PICKER = `<time-picker ng-model="ngModel" complete="completeDialog(ti
 const START_Z_INDEX = 1000;
 
 export class DatePickerDialogService {
-  constructor($animate, $compile, $rootScope, $q) {
+  constructor($animate, $compile, $rootScope, $q, $document) {
+    'ngInject';
+
     this.$animate = $animate;
     this.$compile = $compile;
     this.$rootScope = $rootScope;
     this.$q = $q;
 
-    this._rootElement = document.body;
+    this._rootElement = $document[0].body;
 
     this.dialogs = [];
     this.currentZIndex = START_Z_INDEX;
@@ -44,9 +46,10 @@ export class DatePickerDialogService {
   }
 
   _show(scope, template) {
+    this.currentZIndex++;
+
     let element = this.$compile(template)(scope);
-    this.currentZIndex++
-    element[0].style.zIndex = this.currentZIndex;
+        element[0].style.zIndex = this.currentZIndex;
 
     this.dialogs.push(element);
 
