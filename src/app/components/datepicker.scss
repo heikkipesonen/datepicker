@@ -1,24 +1,27 @@
-$date-picker-cell-size: 50px !default;
-$date-picker-cell-border: #ddd !default;
+$date-picker-cell-size: 40px !default;
+$date-picker-title-size: 50px !default;
+$date-picker-background: rgb(224, 224, 224) !default;
 $date-picker-cell-hover-color: rgba(#221818, 0.81) !default;
-$date-picker-cell-hover-background: rgba(#ffffff, 0.18) !default;
+$date-picker-cell-hover-background: rgba(#ffffff, 0.44) !default;
 $date-picker-cell-selected-background: rgba(#ffffff, 0.43) !default;
-$date-picker-cell-selected-color: rgb(255, 255, 255) !default;
+$date-picker-cell-selected-color: rgb(255, 29, 29) !default;
+$date-picker-cell-selected-hover-color: rgb(249, 26, 26) !default;
 $date-picker-title-bar-background: rgb(210, 53, 53) !default;
 $date-picker-title-bar-color: rgb(255, 255, 255) !default;
 $date-picker-gutter-width: 16px !default;
-$date-picker-cells-wrapper-background: rgb(199, 69, 69) !default;
+$date-picker-cell-disabled-color: rgb(125, 125, 125) !default;
+$date-picker-cell-disabled-background: transparent !default;
 
 
 .date-picker{
   position: absolute;
   top: 0;
   left: 0;
+
   box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
 
-  font-family: helvetica neue;
 
-  .date-picker-controls{
+  .date-picker-title{
     color: $date-picker-title-bar-color;
     background-color: $date-picker-title-bar-background;
   }
@@ -32,12 +35,97 @@ $date-picker-cells-wrapper-background: rgb(199, 69, 69) !default;
     flex: 1;
   }
 
+  .date-picker-calendar{
+    &.ng-animate{
+      transition: 0.3s;
+      transition-timing-function: ease-in-out;
+    }
+    &.ng-enter{
+      opacity: 0;
+    }
+
+    &.ng-enter-active{
+      opacity: 1;
+    }
+
+    &.ng-leave{
+      opacity: 1;
+    }
+
+    &.ng-leave-active{
+      opacity: 0;
+    }
+  }
+
+  .picker-direction-forward{
+    .date-picker-calendar{
+      &.ng-enter{
+        transform: translate3d(0, 100%, 0);
+      }
+
+      &.ng-enter-active{
+        transform: translate3d(0, 0, 0);
+      }
+
+      &.ng-leave{
+        transform: translate3d(0, 0, 0);
+      }
+
+      &.ng-leave-active{
+        transform: translate3d(0, -100%, 0);
+      }
+    }
+  }
+  .picker-direction-back{
+    .date-picker-calendar{
+      &.ng-enter{
+        transform: translate3d(0, -100%, 0);
+      }
+
+      &.ng-enter-active{
+        transform: translate3d(0, 0, 0);
+      }
+
+      &.ng-leave{
+        transform: translate3d(0, 0, 0);
+      }
+
+      &.ng-leave-active{
+        transform: translate3d(0, 100%, 0);
+      }
+    }
+  }
+
+  .date-picker-cells-wrapper{
+    position: relative;
+    overflow: hidden;
+    padding: $date-picker-gutter-width/2;
+    background-color: $date-picker-background;
+
+    height: 6 * $date-picker-cell-size;
+    width: 7 * $date-picker-cell-size;
+
+
+    .date-picker-calendar{
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+
+    }
+  }
+
   .date-picker-display{
     font-size: 16pt;
     font-weight: 200;
     text-align: center;
     margin: 0;
-    line-height: $date-picker-cell-size;
+    line-height: $date-picker-title-size;
   }
 
   .date-picker-button{
@@ -46,8 +134,8 @@ $date-picker-cells-wrapper-background: rgb(199, 69, 69) !default;
     margin: 0;
     padding: $date-picker-gutter-width / 2;
     background-color: transparent;
-    width: $date-picker-cell-size;
-    height: $date-picker-cell-size;
+    width: $date-picker-title-size;
+    height: $date-picker-title-size;
     transition: 0.1s;
     transition-timing-function: ease-out;
     cursor: pointer;
@@ -55,12 +143,6 @@ $date-picker-cells-wrapper-background: rgb(199, 69, 69) !default;
     &:hover{
       background-color: rgba(255,255,255,0.2);
     }
-  }
-
-
-
-  .date-picker-cells-wrapper{
-    background-color: $date-picker-cells-wrapper-background;
   }
 
   .date-picker-cell{
@@ -75,7 +157,7 @@ $date-picker-cells-wrapper-background: rgb(199, 69, 69) !default;
     cursor: pointer;
     border-radius: 50%;
 
-    &:hover{
+    &:hover:not(.date-picker-cell-disabled){
       background-color: $date-picker-cell-hover-background;
       color: $date-picker-cell-hover-color;
     }
@@ -83,6 +165,19 @@ $date-picker-cells-wrapper-background: rgb(199, 69, 69) !default;
     &.date-picker-cell-selected{
       color: $date-picker-cell-selected-color;
       background-color: $date-picker-cell-selected-background;
+
+      &:hover{
+        color: $date-picker-cell-selected-hover-color;
+      }
+    }
+
+    &.date-picker-cell-another-month{
+      color: $date-picker-cell-disabled-color;
+      background-color: $date-picker-cell-disabled-background;
+    }
+    &.date-picker-cell-disabled{
+      color: $date-picker-cell-disabled-color;
+      background-color: $date-picker-cell-disabled-background;
     }
   }
 }
