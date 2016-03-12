@@ -2,10 +2,13 @@ const TEMPLATE = `
 <div class="date-picker-dialog-container">
   <div class="date-picker-dialog-overlay" ng-click="cancelDialog()"></div>
   <div class="date-picker-dialog">
-    <date-picker ng-model="ngModel" complete="completeDialog(date)" cancel="cancelDialog()"></date-picker>
+    {{PARTIAL}}
   </div>
 </div>
 `;
+
+const DATE_PICKER = `<date-picker ng-model="ngModel" complete="completeDialog(date)" cancel="cancelDialog()"></date-picker>`;
+const TIME_PICKER = `<time-picker ng-model="ngModel" complete="completeDialog(time)" cancel="cancelDialog()"></time-picker>`;
 
 const START_Z_INDEX = 1000;
 
@@ -22,31 +25,32 @@ export class DatePickerDialogService {
     this.currentZIndex = START_Z_INDEX;
   }
 
-  pick(model) {
+  _createScope(model){
     let d = this.$q.defer();
     let scope = this.$rootScope.$new();
+        scope.promise = d.promise;
         scope.ngModel = new Date(model.getTime());
 
-        scope.completeDialog = (date) => {
-          model.setTime(date.getTime());
-          console.log(date);
-          d.resolve(scope.ngModel);
-        };
+    scope.completeDialog = (date) => {
+      model.setTime(date.getTime());
+      d.resolve(scope.ngModel);
+    };
 
-        scope.cancelDialog = () => {
-          d.reject();
-        };
+    scope.cancelDialog = () => {
+      d.reject(scope.ngModel);
+    };
 
+    return scope;
+  }
 
-
-    let element = this.$compile(TEMPLATE)(scope);
+  _show(scope, template) {
+    let element = this.$compile(template)(scope);
     this.currentZIndex++
     element[0].style.zIndex = this.currentZIndex;
 
     this.dialogs.push(element);
-    this.$animate.enter(element, this._rootElement, this._rootElement.lastChild);
 
-    d.promise.finally(() => {
+    scope.promise.finally(() => {
       this.dialogs.splice(this.dialogs.indexOf(element), 1);
       if (this.dialogs.length === 0){
         this.currentZIndex = START_Z_INDEX;
@@ -55,6 +59,18 @@ export class DatePickerDialogService {
       this.$animate.leave(element);
     });
 
-    return d.promise;
+    return this.$animate.enter(element, this._rootElement, this._rootElement.lastChild);
+  }
+
+  pickTime(model){
+    let scope = this._createScope(model);
+    this._show(scope, TEMPLATE.replace('{{PARTIAL}}', DATE_PICKER));
+    return scope.promise;
+  }
+
+  pickDate(model) {
+    let scope = this._createScope(model);
+    this._show(scope, TEMPLATE.replace('{{PARTIAL}}', TIME_PICKER));
+    return scope.promise;
   }
 }

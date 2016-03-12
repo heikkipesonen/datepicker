@@ -24,6 +24,12 @@ export class TimePickerController {
     this.ngModel.setMinutes(minutes);
   }
 
+  toggleContent(){
+    if (this.contentHidden !== undefined && this.contentHidden !== null){
+      this.contentHidden = !this.contentHidden;
+    }
+  }
+
 }
 
 
@@ -32,21 +38,24 @@ export function TimePickerDirective() {
     restrict: 'E',
     replace: true,
     scope: {
+      cancel: '&?',
+      complete: '&?',
       ngModel: '=',
       format: '=?',
       hoursLabel: '@?',
-      minutesLabel: '@?'
+      minutesLabel: '@?',
+      contentHidden: '=?'
     },
     controller: TimePickerController,
     bindToController: true,
     controllerAs: 'time',
     template:`<div class="time-picker">
-      <div class="time-picker-title">
+      <div class="time-picker-title" ng-click="time.toggleContent()">
         <div class="time-picker-display">
           {{time.ngModel | date : time.format || 'HH:mm'}}
         </div>
       </div>
-      <div class="time-picker-container">
+      <div class="time-picker-container" ng-class="{'time-picker-content-hidden' : time.contentHidden}">
         <div class="time-picker-inner-container">
           <div class="time-picker-subtitle">
             {{time.hoursLabel ||  'hours'}}
@@ -76,6 +85,12 @@ export function TimePickerDirective() {
           </div>
         </div>
       </div>
+      <div class="time-picker-footer time-picker-row" ng-if="time.cancel || time.complete">
+        <button class="time-picker-button" ng-if="time.cancel" ng-click="time.cancel({time: time.ngModel})">Cancel</button>
+        <span class="time-picker-flex"></span>
+        <button class="time-picker-button" ng-if="time.complete" ng-click="time.complete({time: time.ngModel})">Done</button>
+      </div>
+
     </div>`
   };
 }

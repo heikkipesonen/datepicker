@@ -1,11 +1,11 @@
-$time-picker-background: rgb(224, 224, 224);
-$time-picker-title-height: 150px;
+$time-picker-background: rgb(224, 224, 224) !default;
+$time-picker-title-height: 150px !default;
+$time-picker-footer-size: 50px !default;
+$time-picker-title-color: rgb(255, 255, 255) !default;
+$time-picker-title-background: rgb(83, 137, 218) !default;
 
-$time-picker-title-color: rgb(255, 255, 255);
-$time-picker-title-background: rgb(83, 137, 218);
-
-$time-picker-cell-size: 40px;
-$time-picker-gutter-width: 16px;
+$time-picker-cell-size: 40px !default;
+$time-picker-gutter-width: 16px !default;
 
 
 $time-picker-cell-hover-color: rgba(#221818, 0.81) !default;
@@ -13,15 +13,38 @@ $time-picker-cell-hover-background: rgba(#ffffff, 0.44) !default;
 $time-picker-cell-selected-background: rgba(#ffffff, 0.43) !default;
 $time-picker-cell-selected-color: rgb(255, 29, 29) !default;
 $time-picker-cell-selected-hover-color: rgb(249, 26, 26) !default;
-
+$time-picker-footer-bar-background: $time-picker-title-background !default;
+$time-picker-footer-bar-color: rgb(255, 255, 255) !default;
+$time-picker-button-color: rgb(255, 255, 255);
 
 .time-picker{
-  position: absolute;
-  top:50px;
-  left: 500px;
   box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
   overflow: hidden;
   background-color: $time-picker-background;
+
+  .time-picker-container{
+    transition: 0.3s;
+    transition-timing-function: ease-out;
+    max-height: 8 * $time-picker-cell-size;
+    overflow: hidden;
+
+    &.time-picker-content-hidden{
+      max-height: 0px;
+    }
+  }
+
+  .time-picker-footer{
+    height: $time-picker-footer-size;
+    color: $time-picker-footer-bar-color;
+    background-color: $time-picker-footer-bar-background;
+  }
+  .time-picker-row{
+    display: flex;
+    flex-direction: row;
+  }
+  .time-picker-flex{
+    flex: 1;
+  }
 
   .time-picker-inner-container{
     position: relative;
@@ -35,6 +58,27 @@ $time-picker-cell-selected-hover-color: rgb(249, 26, 26) !default;
 
   .time-picker-content{
     width: 7*$time-picker-cell-size;
+  }
+
+  .time-picker-button{
+    outline: none;
+    border: none;
+    margin: 0;
+    padding: $time-picker-gutter-width / 2 $time-picker-gutter-width;
+    background-color: transparent;
+    min-width: $time-picker-cell-size;
+    transition: 0.1s;
+    transition-timing-function: ease-out;
+    cursor: pointer;
+    color: $time-picker-button-color;
+
+    &.date-picker-button-full{
+      width: 100%;
+    }
+
+    &:hover{
+      background-color: rgba(255,255,255,0.2);
+    }
   }
 
   .time-picker-display{

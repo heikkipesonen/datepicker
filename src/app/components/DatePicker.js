@@ -5,8 +5,6 @@ export class DatePickerController {
 
   constructor($scope) {
     'ngInject';
-
-
     this.dayNames = DAY_NAMES;
 
     let lastValue = 0;
@@ -91,6 +89,12 @@ export class DatePickerController {
       this.ngModel.setFullYear(day.getFullYear());
     }
   }
+
+  toggleContent(){
+    if (this.contentHidden !== undefined && this.contentHidden !== null){
+      this.contentHidden = !this.contentHidden;
+    }
+  }
 }
 
 export function DatePickerDirective() {
@@ -102,7 +106,8 @@ export function DatePickerDirective() {
       displayFormat: '@?',
       complete: '&?',
       cancel: '&?',
-      ngModel: '='
+      ngModel: '=',
+      contentHidden: '=?'
     },
     controller: DatePickerController,
     bindToController: true,
@@ -112,28 +117,30 @@ export function DatePickerDirective() {
       <div class="date-picker">
         <div class="date-picker-title date-picker-row">
           <button class="date-picker-button" ng-click="picker.prevMonth()">-</button>
-          <div class="date-picker-display date-picker-flex">
+          <div class="date-picker-display date-picker-flex"  ng-click="picker.toggleContent()">
             {{picker.ngModel | date : picker.displayFormat || 'dd.MM.yyyy'}}
           </div>
           <button class="date-picker-button" ng-click="picker.nextMonth()">+</button>
         </div>
 
-        <div class="date-picker-cells-wrapper" ng-class="picker.direction">
-          <div class="date-picker-calendar" ng-repeat="calendar in picker.month">
-            <div class="date-picker-day-names date-picker-cell-row">
-              <div class="date-picker-day-name-cell" ng-repeat="day in ::picker.dayNames">
-                {{::day}}
+        <div class="date-picker-container" ng-class="{'date-picker-content-hidden' : picker.contentHidden}">
+          <div class="date-picker-cells-wrapper" ng-class="picker.direction">
+            <div class="date-picker-calendar" ng-repeat="calendar in picker.month">
+              <div class="date-picker-day-names date-picker-cell-row">
+                <div class="date-picker-day-name-cell" ng-repeat="day in ::picker.dayNames">
+                  {{::day}}
+                </div>
               </div>
-            </div>
-            <div class="date-picker-week date-picker-cell-row" ng-repeat="week in ::calendar">
-              <div class="date-picker-day date-picker-cell"
-                ng-class="{
-                  'date-picker-cell-selected' : picker.isSelectedDate(day),
-                  'date-picker-cell-another-month' : !picker.isCurrentMonth(day)
-                }"
-                ng-click="picker.setDate(day)"
-                ng-repeat="day in ::week">
-                {{::day.getDate()}}
+              <div class="date-picker-week date-picker-cell-row" ng-repeat="week in ::calendar">
+                <div class="date-picker-day date-picker-cell"
+                  ng-class="{
+                    'date-picker-cell-selected' : picker.isSelectedDate(day),
+                    'date-picker-cell-another-month' : !picker.isCurrentMonth(day)
+                  }"
+                  ng-click="picker.setDate(day)"
+                  ng-repeat="day in ::week">
+                  {{::day.getDate()}}
+                </div>
               </div>
             </div>
           </div>

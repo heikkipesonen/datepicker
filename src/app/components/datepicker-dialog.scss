@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: center;
 
-  .date-picker{
+  .date-picker, .time-picker{
     position: relative;
     left: auto;
     top: auto;;
@@ -18,7 +18,7 @@
   &.ng-animate{
     transition: 0.3s;
     transition-timing-function: ease-in-out;
-    .date-picker{
+    .date-picker, .time-picker{
       transition-delay: 0.1s;
       transition: 0.2s;
     }
@@ -26,7 +26,7 @@
 
   &.ng-enter{
     opacity: 0;
-    .date-picker{
+    .date-picker, .time-picker{
       opacity: 0;
       transform: scale3d(0,0,0);
     }
@@ -34,14 +34,14 @@
 
   &.ng-enter-active{
     opacity: 1;
-    .date-picker{
+    .date-picker, .time-picker{
       opacity: 1;
       transform: scale3d(1,1,1);
     }
   }
   &.ng-leave{
     opacity: 1;
-    .date-picker{
+    .date-picker, .time-picker{
       opacity: 1;
       transform: scale3d(1,1,1);
     }
@@ -49,7 +49,7 @@
 
   &.ng-leave-active{
     opacity: 0;
-    .date-picker{
+    .date-picker, .time-picker{
       opacity: 0;
       transform: scale3d(0,0,0);
     }
