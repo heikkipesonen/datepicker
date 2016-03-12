@@ -111,11 +111,11 @@ export function DatePickerDirective() {
     template: `
       <div class="date-picker">
         <div class="date-picker-title date-picker-row">
-          <button class="date-picker-button" ng-click="picker.prevMonth()"></button>
+          <button class="date-picker-button" ng-click="picker.prevMonth()">-</button>
           <div class="date-picker-display date-picker-flex">
             {{picker.ngModel | date : picker.displayFormat || 'dd.MM.yyyy'}}
           </div>
-          <button class="date-picker-button" ng-click="picker.nextMonth()"></button>
+          <button class="date-picker-button" ng-click="picker.nextMonth()">+</button>
         </div>
 
         <div class="date-picker-cells-wrapper" ng-class="picker.direction">

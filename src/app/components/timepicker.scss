@@ -1,8 +1,8 @@
 $time-picker-background: rgb(182, 182, 182);
 
-$time-picker-wheel-size: 250px;
-$time-picker-wheel-step: 80px;
-$time-picker-title-height: 50px;
+$time-picker-wheel-size: 280px;
+$time-picker-wheel-step: 100px;
+$time-picker-title-height: 150px;
 
 $time-picker-title-color: rgb(255, 255, 255);
 $time-picker-title-background: rgb(83, 137, 218);
@@ -17,7 +17,7 @@ $time-picker-indicator-size: 30px;
   top:50px;
   left: 500px;
   box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
-
+  overflow: hidden;
   background-color: $time-picker-background;
 
   .time-picker-inner-container{
@@ -32,7 +32,7 @@ $time-picker-indicator-size: 30px;
   }
 
   .time-picker-display{
-    font-size: 16pt;
+    font-size: 40pt;
     font-weight: 200;
     text-align: center;
     margin: 0;
@@ -76,6 +76,7 @@ $time-picker-indicator-size: 30px;
     border-radius: 50%;
     width: $time-picker-indicator-size;
     height: $time-picker-indicator-size;
-    background-color: rgb(222, 27, 27);
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.3);
   }
 }
