@@ -1,0 +1,352 @@
+$picker-cell-size: 40px !default;
+$picker-title-size: 150px !default;
+$picker-footer-size: 50px !default;
+$picker-background: rgb(224, 224, 224) !default;
+$picker-cell-hover-color: rgba(#221818, 0.81) !default;
+$picker-cell-hover-background: rgba(#ffffff, 0.44) !default;
+$picker-cell-selected-background: rgba(#ffffff, 0.43) !default;
+$picker-cell-selected-color: rgb(255, 29, 29) !default;
+$picker-cell-selected-hover-color: rgb(249, 26, 26) !default;
+$picker-title-bar-background: rgb(210, 53, 53) !default;
+$picker-title-bar-color: rgb(255, 255, 255) !default;
+$picker-footer-bar-background: rgb(210, 53, 53) !default;
+$picker-footer-bar-color: rgb(255, 255, 255) !default;
+$picker-gutter-width: 16px !default;
+$picker-cell-disabled-color: rgb(125, 125, 125) !default;
+$picker-cell-disabled-background: transparent !default;
+$picker-button-color: rgb(255, 255, 255);
+$picker-day-name-cell-height: 30px;
+
+.picker-container{
+  display: inline-block;
+  background-color: $picker-background;
+  box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
+
+  .picker-title{
+    color: $picker-title-bar-color;
+    background-color: $picker-title-bar-background;
+    height: $picker-title-size;
+  }
+
+  .picker-footer{
+    height: $picker-footer-size;
+    color: $picker-footer-bar-color;
+    background-color: $picker-footer-bar-background;
+  }
+
+  .picker-display{
+    font-size: 26pt;
+    font-weight: 200;
+    text-align: center;
+    margin: 0;
+    line-height: $picker-title-size;
+  }
+
+  .picker-row{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .picker-flex{
+    flex: 1;
+  }
+
+  .picker-column{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .picker-content{
+    padding: $picker-gutter-width;
+  }
+
+
+  .picker-table{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .picker-table-row{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .picker-table-header{
+    .picker-table-cell{
+      font-size: 10pt;
+      opacity: 0.5;
+      height: $picker-day-name-cell-height;
+    }
+  }
+
+  .picker-table-cell{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: $picker-cell-size;
+    height: $picker-cell-size;
+
+    transition: 0.1s;
+    transition-timing-function: ease-out;
+    cursor: pointer;
+    border-radius: 50%;
+
+     &:hover:not(.picker-table-cell-disabled){
+       background-color: $picker-cell-hover-background;
+       color: $picker-cell-hover-color;
+     }
+
+     &.picker-table-cell-selected{
+       box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+       color: $picker-cell-selected-color;
+       background-color: $picker-cell-selected-background;
+
+       &:hover{
+         color: $picker-cell-selected-hover-color;
+       }
+     }
+
+     &.picker-table-cell-secondary{
+       color: $picker-cell-disabled-color;
+       background-color: $picker-cell-disabled-background;
+     }
+     &.picker-table-cell-disabled{
+       color: $picker-cell-disabled-color;
+       background-color: $picker-cell-disabled-background;
+     }
+  }
+
+  .picker-button{
+    outline: none;
+    border: none;
+    margin: 0;
+    padding: $picker-gutter-width / 2 $picker-gutter-width;
+    background-color: transparent;
+    min-width: $picker-cell-size;
+    transition: 0.1s;
+    transition-timing-function: ease-out;
+    cursor: pointer;
+    color: $picker-button-color;
+
+    &.picker-button-full{
+      width: 100%;
+    }
+
+    &:hover{
+      background-color: rgba(255,255,255,0.2);
+    }
+  }
+}
+
+
+//
+// .picker-container{
+//   box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
+//   background-color: $picker-background;
+//
+//   .picker-title{
+//     color: $picker-title-bar-color;
+//     background-color: $picker-title-bar-background;
+//   }
+//
+//   .picker-footer{
+//     height: $picker-footer-size;
+//     color: $picker-footer-bar-color;
+//     background-color: $picker-footer-bar-background;
+//   }
+//
+//   .picker-flex{
+//     flex: 1;
+//   }
+//
+//   .picker-row{
+//     display: flex;
+//     flex-direction: row;
+//   }
+//
+//   .picker-flex{
+//     flex: 1;
+//   }
+//
+//   .picker-calendar{
+//     &.ng-animate{
+//       transform: translate3d(0, 0, 0);
+//       transition: 0.3s;
+//       transition-timing-function: ease-in-out;
+//     }
+//     &.ng-enter{
+//       opacity: 0;
+//     }
+//
+//     &.ng-enter-active{
+//       opacity: 1;
+//     }
+//
+//     &.ng-leave{
+//       opacity: 1;
+//     }
+//
+//     &.ng-leave-active{
+//       opacity: 0;
+//     }
+//   }
+//
+//   .picker-direction-forward{
+//     .picker-calendar{
+//       &.ng-enter{
+//         transform: translate3d(0, 100%, 0);
+//       }
+//
+//       &.ng-enter-active{
+//         transform: translate3d(0, 0, 0);
+//       }
+//
+//       &.ng-leave{
+//         transform: translate3d(0, 0, 0);
+//       }
+//
+//       &.ng-leave-active{
+//         transform: translate3d(0, -100%, 0);
+//       }
+//     }
+//   }
+//   .picker-direction-back{
+//     .picker-calendar{
+//       &.ng-enter{
+//         transform: translate3d(0, -100%, 0);
+//       }
+//
+//       &.ng-enter-active{
+//         transform: translate3d(0, 0, 0);
+//       }
+//
+//       &.ng-leave{
+//         transform: translate3d(0, 0, 0);
+//       }
+//
+//       &.ng-leave-active{
+//         transform: translate3d(0, 100%, 0);
+//       }
+//     }
+//   }
+//
+//   .picker-cells-wrapper{
+//     position: relative;
+//     overflow: hidden;
+//     padding: $picker-gutter-width/2;
+//
+//
+//     height: 6 * $picker-cell-size + $picker-day-name-cell-height;
+//     width: 7 * $picker-cell-size;
+//
+//
+//     .picker-calendar{
+//       position: absolute;
+//       top: $picker-gutter-width/2;
+//       left: $picker-gutter-width/2;
+//       bottom: $picker-gutter-width/2;
+//       right: $picker-gutter-width/2;
+//
+//       display: flex;
+//       justify-content: center;
+//       flex-direction: column;
+//
+//     }
+//   }
+//
+//   .picker-display{
+//     font-size: 26pt;
+//     font-weight: 200;
+//     text-align: center;
+//     margin: 0;
+//     line-height: $picker-title-size;
+//   }
+//
+//   .picker-button{
+//     outline: none;
+//     border: none;
+//     margin: 0;
+//     padding: $picker-gutter-width / 2 $picker-gutter-width;
+//     background-color: transparent;
+//     min-width: $picker-cell-size;
+//     transition: 0.1s;
+//     transition-timing-function: ease-out;
+//     cursor: pointer;
+//     color: $picker-button-color;
+//
+//     &.picker-button-full{
+//       width: 100%;
+//     }
+//
+//     &:hover{
+//       background-color: rgba(255,255,255,0.2);
+//     }
+//   }
+//
+//   .picker-cell-row{
+//     flex-direction: row;
+//   }
+//
+//   .picker-cell{
+//     display: inline-block;
+//     width: $picker-cell-size;
+//     height: $picker-cell-size;
+//     line-height: $picker-cell-size;
+//     text-align: center;
+//     vertical-align: top;
+//     transition: 0.1s;
+//     transition-timing-function: ease-out;
+//     cursor: pointer;
+//     border-radius: 50%;
+//
+//     &:hover:not(.picker-cell-disabled){
+//       background-color: $picker-cell-hover-background;
+//       color: $picker-cell-hover-color;
+//     }
+//
+//     &.picker-cell-selected{
+//       box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+//       color: $picker-cell-selected-color;
+//       background-color: $picker-cell-selected-background;
+//
+//       &:hover{
+//         color: $picker-cell-selected-hover-color;
+//       }
+//     }
+//
+//     &.picker-cell-another-month{
+//       color: $picker-cell-disabled-color;
+//       background-color: $picker-cell-disabled-background;
+//     }
+//     &.picker-cell-disabled{
+//       color: $picker-cell-disabled-color;
+//       background-color: $picker-cell-disabled-background;
+//     }
+//   }
+//
+//   .picker-container{
+//     transition: 0.3s;
+//     transition-timing-function: ease-out;
+//     max-height: 8 * $picker-cell-size;
+//     overflow: hidden;
+//
+//     &.picker-content-hidden{
+//       max-height: 0px;
+//     }
+//   }
+//
+//
+//   .picker-day-names{
+//     display: flex;
+//     font-size: 10pt;
+//     opacity: 0.5;
+//
+//     .picker-day-name-cell{
+//       flex: 1;
+//       text-align: center;
+//       line-height: $picker-day-name-cell-height;
+//     }
+//   }
+//
+// }

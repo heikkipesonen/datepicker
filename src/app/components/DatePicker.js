@@ -114,43 +114,82 @@ export function DatePickerDirective() {
     controllerAs: 'picker',
     require: 'ngModel',
     template: `
-      <div class="date-picker">
-        <div class="date-picker-title date-picker-row">
-          <button class="date-picker-button" ng-click="picker.prevMonth()">-</button>
-          <div class="date-picker-display date-picker-flex"  ng-click="picker.toggleContent()">
-            {{picker.ngModel | date : picker.displayFormat || 'dd.MM.yyyy'}}
-          </div>
-          <button class="date-picker-button" ng-click="picker.nextMonth()">+</button>
-        </div>
-
-        <div class="date-picker-container" ng-class="{'date-picker-content-hidden' : picker.contentHidden}">
-          <div class="date-picker-cells-wrapper" ng-class="picker.direction">
-            <div class="date-picker-calendar" ng-repeat="calendar in picker.month">
-              <div class="date-picker-day-names date-picker-cell-row">
-                <div class="date-picker-day-name-cell" ng-repeat="day in ::picker.dayNames">
-                  {{::day}}
-                </div>
-              </div>
-              <div class="date-picker-week date-picker-cell-row" ng-repeat="week in ::calendar">
-                <div class="date-picker-day date-picker-cell"
-                  ng-class="{
-                    'date-picker-cell-selected' : picker.isSelectedDate(day),
-                    'date-picker-cell-another-month' : !picker.isCurrentMonth(day)
-                  }"
-                  ng-click="picker.setDate(day)"
-                  ng-repeat="day in ::week">
-                  {{::day.getDate()}}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="date-picker-footer date-picker-row" ng-if="picker.cancel || picker.complete">
-          <button class="date-picker-button" ng-if="picker.cancel" ng-click="picker.cancel({date: picker.ngModel})">Cancel</button>
-          <span class="date-picker-flex"></span>
-          <button class="date-picker-button" ng-if="picker.complete" ng-click="picker.complete({date: picker.ngModel})">Done</button>
-        </div>
-      </div>
-    `
+    <div>
+      <picker-container>
+        <picker-title>
+          <picker-button ng-click="picker.prevMonth()"></picker-button>
+          <picker-display>{{picker.ngModel | date : picker.displayFormat || 'dd.MM.yyyy'}}</picker-display>
+          <picker-button ng-click="picker.nextMonth()"></picker-button>
+        </picker-title>
+        <picker-content ng-class="picker.direction">
+          <picker-table ng-repeat="calendar in picker.month">
+            <picker-table-header>
+              <picker-cell  ng-repeat="day in ::picker.dayNames">
+                {{::day}}
+              </picker-cell>
+            </picker-table-header>
+            <picker-row ng-repeat="week in ::calendar">
+              <picker-cell ng-repeat="day in ::week"
+                selected="picker.isSelectedDate(day)"
+                secondary="!picker.isCurrentMonth(day)"
+                ng-click="picker.setDate(day)"
+                >
+                {{::day.getDate()}}
+              </picker-cell>
+            </picker-row>
+          </picker-table>
+        </picker-content>
+        <picker-footer>
+          <picker-button
+            ng-click="picker.cancel({date: picker.ngModel})">
+            {{picker.labelCancel || 'cancel'}}
+          </picker-button>
+          <span class="picker-flex"></span>
+          <picker-button
+            ng-click="picker.complete({date: picker.ngModel})">
+            {{picker.labelComplete || 'complete'}}
+          </picker-button>
+        </picker-footer>
+      </picker-container>
+    </div>
+`
+    //   <div class="date-picker">
+    //     <div class="date-picker-title date-picker-row">
+    //       <button class="date-picker-button" >-</button>
+    //       <div class="date-picker-display date-picker-flex"  ng-click="picker.toggleContent()">
+    //
+    //       </div>
+    //       <button class="date-picker-button" ng-click="picker.nextMonth()">+</button>
+    //     </div>
+    //
+    //     <div class="date-picker-container" ng-class="{'date-picker-content-hidden' : picker.contentHidden}">
+    //       <div class="date-picker-cells-wrapper" ng-class="picker.direction">
+    //         <div class="date-picker-calendar" ng-repeat="calendar in picker.month">
+    //           <div class="date-picker-day-names date-picker-cell-row">
+    //             <div class="date-picker-day-name-cell" ng-repeat="day in ::picker.dayNames">
+    //               {{::day}}
+    //             </div>
+    //           </div>
+    //           <div class="date-picker-week date-picker-cell-row" ng-repeat="week in ::calendar">
+    //             <div class="date-picker-day date-picker-cell"
+    //               ng-class="{
+    //                 'date-picker-cell-selected' : picker.isSelectedDate(day),
+    //                 'date-picker-cell-another-month' : !picker.isCurrentMonth(day)
+    //               }"
+    //               ng-click="picker.setDate(day)"
+    //               ng-repeat="day in ::week">
+    //               {{::day.getDate()}}
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
+    //     <div class="date-picker-footer date-picker-row" ng-if="picker.cancel || picker.complete">
+    //       <button class="date-picker-button" ng-if="picker.cancel" ng-click="picker.cancel({date: picker.ngModel})">Cancel</button>
+    //       <span class="date-picker-flex"></span>
+    //       <button class="date-picker-button" ng-if="picker.complete" ng-click="picker.complete({date: picker.ngModel})">Done</button>
+    //     </div>
+    //   </div>
+    // `
   };
 }
