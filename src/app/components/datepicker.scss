@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     padding: $picker-gutter-width/2;
-    height: 6 * $picker-cell-size + $picker-day-name-cell-height + $picker-gutter-width * 2;
+    height: 6 * $picker-cell-size + $picker-day-name-cell-height + $picker-gutter-width * 2 + 6 * 4px;
   }
 
   .picker-table-wrapper{
@@ -27,6 +27,7 @@
   }
 
   .picker-table-wrapper{
+    background-color: $picker-background;
     &.ng-animate{
       transform: translate3d(0, 0, 0);
       transition: 0.3s;

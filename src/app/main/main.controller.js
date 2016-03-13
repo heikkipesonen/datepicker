@@ -3,6 +3,7 @@ class MainController {
     'ngInject';
 
     $scope.pickerModel = new Date();
+    $scope.pickerModel.setMonth(3);
     $scope.pickerMax = new Date();
     $scope.pickerMin = new Date();
 

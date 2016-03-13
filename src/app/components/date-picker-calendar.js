@@ -23,43 +23,30 @@ export class DatePickerCalendarController {
         model.setDate(1);
 
     let getWeek = () => Array(7).fill(false);
-    let currentWeek = getWeek();
-    let month = [];
+    let month = Array(6).fill(false).map((week) => {
+      return getWeek();
+    });
 
+    let currentWeek = 0;
     let firstWeekDayIndexOfMonth = DAY_ORDER[model.getDay()];
     let fillModel = new Date(model.getTime());
 
     while (firstWeekDayIndexOfMonth >= 0){
-      currentWeek[DAY_ORDER[fillModel.getDay()]] = new Date(fillModel.getTime());
       fillModel.setDate(fillModel.getDate()-1);
+      month[0][DAY_ORDER[fillModel.getDay()]] = new Date(fillModel.getTime());
       firstWeekDayIndexOfMonth--;
     }
 
-    while (model.getMonth() === currentMonth){
+
+    while (currentWeek < month.length){
       let currentDay = model.getDay();
-
-      currentWeek[DAY_ORDER[currentDay]] = new Date(model.getTime());
-
+      month[currentWeek][DAY_ORDER[currentDay]] = new Date(model.getTime());
       if (DAY_ORDER[currentDay] === 6){
-        month.push(currentWeek);
-        currentWeek = getWeek();
+        currentWeek++;
       }
-
       model.setDate(model.getDate() + 1);
     }
 
-    if (month.indexOf(currentWeek) < 0 && DAY_ORDER[model.getDay()-1] !== 6){
-      month.push(currentWeek);
-
-      let firstInvalidDay =  DAY_ORDER[model.getDay()];
-      fillModel = new Date(model.getTime());
-
-      while (firstInvalidDay <= 6){
-        currentWeek[DAY_ORDER[fillModel.getDay()]] = new Date(fillModel.getTime());
-        fillModel.setDate(fillModel.getDate()+1);
-        firstInvalidDay++;
-      }
-    }
 
     return month;
   }
@@ -116,7 +103,7 @@ export function DatePickerCalendarDirective() {
               </picker-table-cell>
             </picker-table-header>
             <picker-table-row ng-repeat="week in ::month">
-              <picker-table-cell ng-repeat="day in ::week"
+              <picker-table-cell ng-repeat="day in ::week track by $index"
                 selected="calendar.isSelectedDate(day)"
                 secondary="!calendar.isCurrentMonth(day)"
                 disabled="!calendar.isWithinBounds(day)"

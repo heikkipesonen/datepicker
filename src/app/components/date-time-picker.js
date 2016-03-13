@@ -15,9 +15,9 @@ export function DateTimePickerDirective() {
     template: `
       <div class="date-time-picker picker-container">
         <picker-title>
-          {{datetime.ngModel | date : datetime.format || 'dd.MM.yyyy HH:mm'}}
+          <picker-display>{{datetime.ngModel | date : datetime.format || 'dd.MM.yyyy HH:mm'}}</picker-display>
         </picker-title>
-        <div class="date-time-picker-content picker-row">
+        <div class="date-time-picker-content picker-column">
           <div class="date-picker">
             <date-picker-calendar ng-model="datetime.ngModel"></date-picker-calendar>
           </div>

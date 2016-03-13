@@ -102,10 +102,8 @@ export function pickerTableCell(){
           'picker-table-cell-selected' : selected,
           'picker-table-cell-secondary' : secondary,
           'picker-table-cell-disabled' : disabled
-        }">
-        <div class="picker-table-cell-content">
-          <div class="picker-table-cell-inner-content"  ng-transclude></div>
-        </div>
+        }"
+        ng-transclude>
       </div>`
   };
 }

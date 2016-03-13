@@ -21,9 +21,8 @@ $picker-day-name-cell-height: 30px !default;
 
 .picker-container{
   width: 300px;
+  min-width: 300px;
   box-sizing: border-box;
-
-
   display: flex;
   flex-direction: column;
   background-color: $picker-background;
@@ -36,6 +35,7 @@ $picker-day-name-cell-height: 30px !default;
   }
 
   .picker-title{
+
     color: $picker-title-bar-color;
     background-color: $picker-title-bar-background;
     height: $picker-title-size;
@@ -90,7 +90,11 @@ $picker-day-name-cell-height: 30px !default;
   .picker-table-row{
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    max-width: 100%;
+    overflow: hidden;
+    justify-content: space-between;
+    padding-top: 2px;
+    padding-bottom: 2px;
   }
 
   .picker-table-header{
@@ -103,28 +107,17 @@ $picker-day-name-cell-height: 30px !default;
 
   .picker-table-cell{
     position: relative;
-    flex: 1;
     transition: 0.1s;
     transition-timing-function: ease-out;
     cursor: pointer;
     border-radius: 50%;
 
-    .picker-table-cell-content{
-      height: 0;
-      padding-bottom: 100%;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    .picker-table-cell-inner-content{
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    width: $picker-cell-size;
+    height: $picker-cell-size;
 
 
      &:hover:not(.picker-table-cell-disabled){
