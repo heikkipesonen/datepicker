@@ -30,9 +30,11 @@ $picker-day-name-cell-height: 30px !default;
   box-shadow: 0px 0px 250px 0px rgba(0,0,0,0.5);
   position: relative;
   overflow: hidden;
+
   *{
     box-sizing: border-box;
   }
+
   .picker-title{
     color: $picker-title-bar-color;
     background-color: $picker-title-bar-background;

@@ -1,10 +1,11 @@
 const DAY_ORDER = [6,0,1,2,3,4,5];
 const DAY_NAMES = ['Ma','Ti','Ke','To','Pe','La','Su'];
 
-export class DatePickerController {
 
+export class DatePickerCalendarController {
   constructor($scope) {
     'ngInject';
+
     this.dayNames = DAY_NAMES;
 
     let lastValue = 0;
@@ -82,14 +83,6 @@ export class DatePickerController {
     return result;
   }
 
-  nextMonth(){
-    this.ngModel.setMonth(this.ngModel.getMonth()+1);
-  }
-
-  prevMonth(){
-    this.ngModel.setMonth(this.ngModel.getMonth()-1);
-  }
-
   setDate(day) {
     if (day && this.isWithinBounds(day)){
       this.ngModel.setDate(day.getDate());
@@ -98,78 +91,44 @@ export class DatePickerController {
     }
   }
 
-  toggleContent(){
-    if (this.contentHidden !== undefined && this.contentHidden !== null){
-      this.contentHidden = !this.contentHidden;
-    }
-  }
 }
 
-export function DatePickerDirective() {
+export function DatePickerCalendarDirective() {
   return {
     restrict: 'E',
     replace: true,
     scope: {
-      labelComplete: '@?',
-      displayFormat: '@?',
-      complete: '&?',
-      cancel: '&?',
       ngModel: '=',
-      maxDate: '=',
-      minDate: '=',
-
-      contentHidden: '=?'
+      minDate: '=?',
+      maxDate: '=?'
     },
-    controller: DatePickerController,
+    controller: DatePickerCalendarController,
     bindToController: true,
-    controllerAs: 'picker',
-    require: 'ngModel',
+    controllerAs: 'calendar',
     template: `
     <div>
-      <picker-container class="date-picker">
-        <picker-title class="picker-column">
-          <picker-button ng-click="picker.prevMonth()">-</picker-button>
-          <picker-display>{{picker.ngModel | date : picker.displayFormat || 'dd.MM.yyyy'}}</picker-display>
-          <picker-button ng-click="picker.nextMonth()">+</picker-button>
-        </picker-title>
-
-
-        <picker-content ng-class="picker.direction" class="picker-calendar">
-          <div class="picker-table-wrapper" ng-repeat="calendar in picker.month">
-            <picker-table>
-              <picker-table-header>
-                <picker-table-cell  ng-repeat="day in ::picker.dayNames">
-                  {{::day}}
-                </picker-table-cell>
-              </picker-table-header>
-              <picker-table-row ng-repeat="week in ::calendar">
-                <picker-table-cell ng-repeat="day in ::week"
-                  selected="picker.isSelectedDate(day)"
-                  secondary="!picker.isCurrentMonth(day)"
-                  disabled="!picker.isWithinBounds(day)"
-                  ng-click="picker.setDate(day)"
-                  >
-                  {{::day.getDate()}}
-                </picker-table-cell>
-              </picker-table-row>
-            </picker-table>
-          </div>
-        </picker-content>
-
-
-        <picker-footer>
-          <picker-button
-            ng-click="picker.cancel({date: picker.ngModel})">
-            {{picker.labelCancel || 'cancel'}}
-          </picker-button>
-          <span class="picker-flex"></span>
-          <picker-button
-            ng-click="picker.complete({date: picker.ngModel})">
-            {{picker.labelComplete || 'complete'}}
-          </picker-button>
-        </picker-footer>
-      </picker-container>
+      <picker-content ng-class="calendar.direction" class="picker-calendar">
+        <div class="picker-table-wrapper" ng-repeat="month in calendar.month">
+          <picker-table>
+            <picker-table-header>
+              <picker-table-cell  ng-repeat="dayName in ::calendar.dayNames">
+                {{::dayName}}
+              </picker-table-cell>
+            </picker-table-header>
+            <picker-table-row ng-repeat="week in ::month">
+              <picker-table-cell ng-repeat="day in ::week"
+                selected="calendar.isSelectedDate(day)"
+                secondary="!calendar.isCurrentMonth(day)"
+                disabled="!calendar.isWithinBounds(day)"
+                ng-click="calendar.setDate(day)"
+                >
+                {{::day.getDate()}}
+              </picker-table-cell>
+            </picker-table-row>
+          </picker-table>
+        </div>
+      </picker-content>
     </div>
     `
-  };
+  }
 }

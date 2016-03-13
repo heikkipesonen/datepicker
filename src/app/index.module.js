@@ -1,14 +1,21 @@
 import MainController from './main/main.controller';
-import {DatePickerDirective} from './components/DatePicker';
-import {DatePickerDialogService} from './components/DatePickerDialog';
-import {TimePickerDirective} from './components/TimePicker';
+import {DatePickerDirective} from './components/date-picker';
+import {DatePickerCalendarDirective} from './components/date-picker-calendar';
+import {DateTimePickerDirective} from './components/date-time-picker';
+import {DatePickerDialogService} from './components/picker-dialog';
+import {TimePickerDirective} from './components/time-picker';
+import {TimePickerTableDirective} from './components/time-picker-table';
 import * as picker from './components/directives';
 
 angular.module('DatePicker', ['ngAnimate'])
   .controller('MainController', MainController)
-  .directive('datePicker', DatePickerDirective)
-  .directive('timePicker', TimePickerDirective)
   .service('DatePickerDialogService', DatePickerDialogService)
+
+  .directive('datePicker', DatePickerDirective)
+  .directive('datePickerCalendar', DatePickerCalendarDirective)
+  .directive('timePicker', TimePickerDirective)
+  .directive('timePickerTable', TimePickerTableDirective)
+  .directive('dateTimePicker', DateTimePickerDirective)
 
   .directive('pickerTitle', picker.pickerTitle)
   .directive('pickerFooter', picker.pickerFooter)

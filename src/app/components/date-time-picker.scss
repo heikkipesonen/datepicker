@@ -1,0 +1,17 @@
+.date-time-picker.picker-container{
+  width: 600px;
+  min-width: 600px;
+
+  .picker-title{
+    font-size: 30pt;
+    font-weight: 100;
+  }
+
+
+
+  .date-time-picker-content{
+    .date-picker, .time-picker{
+      width: 300px;
+    }
+  }
+}
