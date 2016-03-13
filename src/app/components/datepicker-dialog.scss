@@ -8,13 +8,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  .date-picker, .time-picker{
-    position: relative;
-    left: auto;
-    top: auto;;
-  }
-
   &.ng-animate{
     transition: 0.3s;
     transition-timing-function: ease-in-out;

@@ -14,14 +14,25 @@ $picker-footer-bar-color: rgb(255, 255, 255) !default;
 $picker-gutter-width: 16px !default;
 $picker-cell-disabled-color: rgb(125, 125, 125) !default;
 $picker-cell-disabled-background: transparent !default;
-$picker-button-color: rgb(255, 255, 255);
-$picker-day-name-cell-height: 30px;
+$picker-button-color: rgb(255, 255, 255) !default;
+$picker-button-primary-color: rgb(255, 255, 255) !default;
+$picker-button-primary-background: $picker-title-bar-background !default;
+$picker-day-name-cell-height: 30px !default;
 
 .picker-container{
-  display: inline-block;
-  background-color: $picker-background;
-  box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
+  width: 300px;
+  box-sizing: border-box;
 
+
+  display: flex;
+  flex-direction: column;
+  background-color: $picker-background;
+  box-shadow: 0px 0px 250px 0px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+  *{
+    box-sizing: border-box;
+  }
   .picker-title{
     color: $picker-title-bar-color;
     background-color: $picker-title-bar-background;
@@ -32,6 +43,12 @@ $picker-day-name-cell-height: 30px;
     height: $picker-footer-size;
     color: $picker-footer-bar-color;
     background-color: $picker-footer-bar-background;
+  }
+
+  .picker-subtitle{
+    font-size: 10pt;
+    opacity: 0.7;
+    padding: $picker-gutter-width/2;
   }
 
   .picker-display{
@@ -48,7 +65,7 @@ $picker-day-name-cell-height: 30px;
   }
 
   .picker-flex{
-    flex: 1;
+    flex: 1 0 auto;
   }
 
   .picker-column{
@@ -69,6 +86,7 @@ $picker-day-name-cell-height: 30px;
   .picker-table-row{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .picker-table-header{
@@ -80,17 +98,29 @@ $picker-day-name-cell-height: 30px;
   }
 
   .picker-table-cell{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: $picker-cell-size;
-    height: $picker-cell-size;
-
+    position: relative;
+    flex: 1;
     transition: 0.1s;
     transition-timing-function: ease-out;
     cursor: pointer;
     border-radius: 50%;
+
+    .picker-table-cell-content{
+      height: 0;
+      padding-bottom: 100%;
+    }
+    .picker-table-cell-inner-content{
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
 
      &:hover:not(.picker-table-cell-disabled){
        background-color: $picker-cell-hover-background;
@@ -124,10 +154,22 @@ $picker-day-name-cell-height: 30px;
     padding: $picker-gutter-width / 2 $picker-gutter-width;
     background-color: transparent;
     min-width: $picker-cell-size;
+    min-height: $picker-cell-size;
     transition: 0.1s;
     transition-timing-function: ease-out;
     cursor: pointer;
     color: $picker-button-color;
+
+
+    &.picker-button-primary{
+      color: $picker-button-primary-color;
+      background-color: $picker-button-primary-background;
+
+      &:hover, &:active, &:focus{
+        color: $picker-button-primary-color;
+        background-color: fade_out($picker-button-primary-background, 0.3);
+      }
+    }
 
     &.picker-button-full{
       width: 100%;
@@ -138,215 +180,3 @@ $picker-day-name-cell-height: 30px;
     }
   }
 }
-
-
-//
-// .picker-container{
-//   box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
-//   background-color: $picker-background;
-//
-//   .picker-title{
-//     color: $picker-title-bar-color;
-//     background-color: $picker-title-bar-background;
-//   }
-//
-//   .picker-footer{
-//     height: $picker-footer-size;
-//     color: $picker-footer-bar-color;
-//     background-color: $picker-footer-bar-background;
-//   }
-//
-//   .picker-flex{
-//     flex: 1;
-//   }
-//
-//   .picker-row{
-//     display: flex;
-//     flex-direction: row;
-//   }
-//
-//   .picker-flex{
-//     flex: 1;
-//   }
-//
-//   .picker-calendar{
-//     &.ng-animate{
-//       transform: translate3d(0, 0, 0);
-//       transition: 0.3s;
-//       transition-timing-function: ease-in-out;
-//     }
-//     &.ng-enter{
-//       opacity: 0;
-//     }
-//
-//     &.ng-enter-active{
-//       opacity: 1;
-//     }
-//
-//     &.ng-leave{
-//       opacity: 1;
-//     }
-//
-//     &.ng-leave-active{
-//       opacity: 0;
-//     }
-//   }
-//
-//   .picker-direction-forward{
-//     .picker-calendar{
-//       &.ng-enter{
-//         transform: translate3d(0, 100%, 0);
-//       }
-//
-//       &.ng-enter-active{
-//         transform: translate3d(0, 0, 0);
-//       }
-//
-//       &.ng-leave{
-//         transform: translate3d(0, 0, 0);
-//       }
-//
-//       &.ng-leave-active{
-//         transform: translate3d(0, -100%, 0);
-//       }
-//     }
-//   }
-//   .picker-direction-back{
-//     .picker-calendar{
-//       &.ng-enter{
-//         transform: translate3d(0, -100%, 0);
-//       }
-//
-//       &.ng-enter-active{
-//         transform: translate3d(0, 0, 0);
-//       }
-//
-//       &.ng-leave{
-//         transform: translate3d(0, 0, 0);
-//       }
-//
-//       &.ng-leave-active{
-//         transform: translate3d(0, 100%, 0);
-//       }
-//     }
-//   }
-//
-//   .picker-cells-wrapper{
-//     position: relative;
-//     overflow: hidden;
-//     padding: $picker-gutter-width/2;
-//
-//
-//     height: 6 * $picker-cell-size + $picker-day-name-cell-height;
-//     width: 7 * $picker-cell-size;
-//
-//
-//     .picker-calendar{
-//       position: absolute;
-//       top: $picker-gutter-width/2;
-//       left: $picker-gutter-width/2;
-//       bottom: $picker-gutter-width/2;
-//       right: $picker-gutter-width/2;
-//
-//       display: flex;
-//       justify-content: center;
-//       flex-direction: column;
-//
-//     }
-//   }
-//
-//   .picker-display{
-//     font-size: 26pt;
-//     font-weight: 200;
-//     text-align: center;
-//     margin: 0;
-//     line-height: $picker-title-size;
-//   }
-//
-//   .picker-button{
-//     outline: none;
-//     border: none;
-//     margin: 0;
-//     padding: $picker-gutter-width / 2 $picker-gutter-width;
-//     background-color: transparent;
-//     min-width: $picker-cell-size;
-//     transition: 0.1s;
-//     transition-timing-function: ease-out;
-//     cursor: pointer;
-//     color: $picker-button-color;
-//
-//     &.picker-button-full{
-//       width: 100%;
-//     }
-//
-//     &:hover{
-//       background-color: rgba(255,255,255,0.2);
-//     }
-//   }
-//
-//   .picker-cell-row{
-//     flex-direction: row;
-//   }
-//
-//   .picker-cell{
-//     display: inline-block;
-//     width: $picker-cell-size;
-//     height: $picker-cell-size;
-//     line-height: $picker-cell-size;
-//     text-align: center;
-//     vertical-align: top;
-//     transition: 0.1s;
-//     transition-timing-function: ease-out;
-//     cursor: pointer;
-//     border-radius: 50%;
-//
-//     &:hover:not(.picker-cell-disabled){
-//       background-color: $picker-cell-hover-background;
-//       color: $picker-cell-hover-color;
-//     }
-//
-//     &.picker-cell-selected{
-//       box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
-//       color: $picker-cell-selected-color;
-//       background-color: $picker-cell-selected-background;
-//
-//       &:hover{
-//         color: $picker-cell-selected-hover-color;
-//       }
-//     }
-//
-//     &.picker-cell-another-month{
-//       color: $picker-cell-disabled-color;
-//       background-color: $picker-cell-disabled-background;
-//     }
-//     &.picker-cell-disabled{
-//       color: $picker-cell-disabled-color;
-//       background-color: $picker-cell-disabled-background;
-//     }
-//   }
-//
-//   .picker-container{
-//     transition: 0.3s;
-//     transition-timing-function: ease-out;
-//     max-height: 8 * $picker-cell-size;
-//     overflow: hidden;
-//
-//     &.picker-content-hidden{
-//       max-height: 0px;
-//     }
-//   }
-//
-//
-//   .picker-day-names{
-//     display: flex;
-//     font-size: 10pt;
-//     opacity: 0.5;
-//
-//     .picker-day-name-cell{
-//       flex: 1;
-//       text-align: center;
-//       line-height: $picker-day-name-cell-height;
-//     }
-//   }
-//
-// }

@@ -1,0 +1,90 @@
+.date-picker{
+
+  .picker-calendar{
+    position: relative;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    padding: $picker-gutter-width/2;
+    height: 6 * $picker-cell-size + $picker-day-name-cell-height + $picker-gutter-width * 2;
+  }
+
+  .picker-table-wrapper{
+    position: absolute;
+    left: $picker-gutter-width;
+    right: $picker-gutter-width;
+    bottom: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  }
+
+  .picker-table{
+    width: 100%;
+  }
+
+  .picker-table-wrapper{
+    &.ng-animate{
+      transform: translate3d(0, 0, 0);
+      transition: 0.3s;
+      transition-timing-function: ease-in-out;
+    }
+    &.ng-enter{
+      opacity: 0;
+    }
+
+    &.ng-enter-active{
+      opacity: 1;
+    }
+
+    &.ng-leave{
+      opacity: 1;
+    }
+
+    &.ng-leave-active{
+      opacity: 0;
+    }
+  }
+
+  .picker-direction-forward{
+    .picker-table-wrapper{
+      &.ng-enter{
+        transform: translate3d(0, 100%, 0);
+      }
+
+      &.ng-enter-active{
+        transform: translate3d(0, 0, 0);
+      }
+
+      &.ng-leave{
+        transform: translate3d(0, 0, 0);
+      }
+
+      &.ng-leave-active{
+        transform: translate3d(0, -100%, 0);
+      }
+    }
+  }
+  .picker-direction-back{
+    .picker-table-wrapper{
+      &.ng-enter{
+        transform: translate3d(0, -100%, 0);
+      }
+
+      &.ng-enter-active{
+        transform: translate3d(0, 0, 0);
+      }
+
+      &.ng-leave{
+        transform: translate3d(0, 0, 0);
+      }
+
+      &.ng-leave-active{
+        transform: translate3d(0, 100%, 0);
+      }
+    }
+  }
+}

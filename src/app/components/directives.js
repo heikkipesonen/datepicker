@@ -77,7 +77,7 @@ export function pickerTableHeader(){
   };
 }
 
-export function pickerRow(){
+export function pickerTableRow(){
   return {
     restrict: 'E',
     replace: true,
@@ -86,7 +86,7 @@ export function pickerRow(){
   };
 }
 
-export function pickerCell(){
+export function pickerTableCell(){
   return {
     restrict: 'E',
     scope: {
@@ -100,8 +100,10 @@ export function pickerCell(){
         ng-class="{
           'picker-table-cell-selected' : selected,
           'picker-table-cell-secondary' : secondary
-        }"
-        ng-transclude>
+        }">
+        <div class="picker-table-cell-content">
+          <div class="picker-table-cell-inner-content"  ng-transclude></div>
+        </div>
       </div>`
   };
 }

@@ -4,129 +4,31 @@ $time-picker-footer-size: 50px !default;
 $time-picker-title-color: rgb(255, 255, 255) !default;
 $time-picker-title-background: rgb(83, 137, 218) !default;
 
-$time-picker-cell-size: 40px !default;
-$time-picker-gutter-width: 16px !default;
 
-
-$time-picker-cell-hover-color: rgba(#221818, 0.81) !default;
-$time-picker-cell-hover-background: rgba(#ffffff, 0.44) !default;
-$time-picker-cell-selected-background: rgba(#ffffff, 0.43) !default;
-$time-picker-cell-selected-color: rgb(255, 29, 29) !default;
-$time-picker-cell-selected-hover-color: rgb(249, 26, 26) !default;
 $time-picker-footer-bar-background: $time-picker-title-background !default;
 $time-picker-footer-bar-color: rgb(255, 255, 255) !default;
 $time-picker-button-color: rgb(255, 255, 255);
 
-.time-picker{
-  box-shadow: 0px 0px 100px 0px rgba(0,0,0,0.2);
-  overflow: hidden;
+.picker-container.time-picker{
   background-color: $time-picker-background;
 
-  .time-picker-container{
-    transition: 0.3s;
-    transition-timing-function: ease-out;
-    max-height: 8 * $time-picker-cell-size;
-    overflow: hidden;
-
-    &.time-picker-content-hidden{
-      max-height: 0px;
-    }
-  }
-
-  .time-picker-footer{
+  .picker-footer{
     height: $time-picker-footer-size;
     color: $time-picker-footer-bar-color;
     background-color: $time-picker-footer-bar-background;
   }
-  .time-picker-row{
-    display: flex;
-    flex-direction: row;
-  }
-  .time-picker-flex{
-    flex: 1;
-  }
 
-  .time-picker-inner-container{
-    position: relative;
-    padding: $time-picker-gutter-width / 2;
-  }
-
-  .time-picker-title{
+  .picker-title{
     color: $time-picker-title-color;
     background-color: $time-picker-title-background;
   }
 
-  .time-picker-content{
-    width: 7*$time-picker-cell-size;
-  }
 
-  .time-picker-button{
-    outline: none;
-    border: none;
-    margin: 0;
-    padding: $time-picker-gutter-width / 2 $time-picker-gutter-width;
-    background-color: transparent;
-    min-width: $time-picker-cell-size;
-    transition: 0.1s;
-    transition-timing-function: ease-out;
-    cursor: pointer;
-    color: $time-picker-button-color;
-
-    &.date-picker-button-full{
-      width: 100%;
-    }
-
-    &:hover{
-      background-color: rgba(255,255,255,0.2);
-    }
-  }
-
-  .time-picker-display{
+  .picker-display{
     font-size: 40pt;
     font-weight: 200;
     text-align: center;
     margin: 0;
-    line-height: $time-picker-title-height;
-  }
-
-  .time-picker-section{
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 7 * $time-picker-cell-size;
-  }
-
-  .time-picker-subtitle{
-    font-size: 10pt;
-    opacity: 0.7;
-    padding: $time-picker-gutter-width/2;
-  }
-
-  .time-picker-cell{
-    display: inline-block;
-    width: $time-picker-cell-size;
-    height: $time-picker-cell-size;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-
-    &:hover:not(.time-picker-cell-disabled){
-      background-color: $time-picker-cell-hover-background;
-      color: $time-picker-cell-hover-color;
-    }
-
-    &.time-picker-cell-selected{
-      box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
-      color: $time-picker-cell-selected-color;
-      background-color: $time-picker-cell-selected-background;
-
-      &:hover{
-        color: $time-picker-cell-selected-hover-color;
-      }
-    }
   }
 
 }
