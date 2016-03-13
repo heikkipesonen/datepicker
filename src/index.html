@@ -24,7 +24,11 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
   <div ng-controller="MainController" class="view">
-    <time-picker ng-model="pickerModel"></time-picker>
+    <div style="display:flex">
+    <date-picker ng-model="pickerMin" max-date="pickerMax"></date-picker>
+    <date-picker ng-model="pickerModel" max-date="pickerMax" min-date="pickerMin"></date-picker>
+    <date-picker ng-model="pickerMax" min-date="pickerMin"></date-picker>
+    </div>
     <button ng-click="pickDate()">TIME</button>
     <button ng-click="pickTime()">DATE</button>
   </div>

@@ -3,6 +3,8 @@ class MainController {
     'ngInject';
 
     $scope.pickerModel = new Date();
+    $scope.pickerMax = new Date();
+    $scope.pickerMin = new Date();
 
     $scope.pickTime = () => {
       DatePickerDialogService.pickTime($scope.pickerModel);

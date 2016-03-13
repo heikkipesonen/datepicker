@@ -74,6 +74,14 @@ export class DatePickerController {
     return day ? day.getMonth() === this.ngModel.getMonth() : false;
   }
 
+  isWithinBounds(day) {
+    let result = true;
+    result = this.minDate ? day < this.minDate ? false : true : true;
+    result = result ? this.maxDate ? day > this.maxDate ? false : true : true : false;
+
+    return result;
+  }
+
   nextMonth(){
     this.ngModel.setMonth(this.ngModel.getMonth()+1);
   }
@@ -83,7 +91,7 @@ export class DatePickerController {
   }
 
   setDate(day) {
-    if (day){
+    if (day && this.isWithinBounds(day)){
       this.ngModel.setDate(day.getDate());
       this.ngModel.setMonth(day.getMonth());
       this.ngModel.setFullYear(day.getFullYear());
@@ -107,6 +115,9 @@ export function DatePickerDirective() {
       complete: '&?',
       cancel: '&?',
       ngModel: '=',
+      maxDate: '=',
+      minDate: '=',
+
       contentHidden: '=?'
     },
     controller: DatePickerController,
@@ -116,11 +127,12 @@ export function DatePickerDirective() {
     template: `
     <div>
       <picker-container class="date-picker">
-        <picker-title>
+        <picker-title class="picker-column">
+          <picker-button ng-click="picker.prevMonth()">-</picker-button>
           <picker-display>{{picker.ngModel | date : picker.displayFormat || 'dd.MM.yyyy'}}</picker-display>
+          <picker-button ng-click="picker.nextMonth()">+</picker-button>
         </picker-title>
 
-        <picker-button class="picker-flex picker-button-primary" ng-click="picker.prevMonth()">-</picker-button>
 
         <picker-content ng-class="picker.direction" class="picker-calendar">
           <div class="picker-table-wrapper" ng-repeat="calendar in picker.month">
@@ -134,6 +146,7 @@ export function DatePickerDirective() {
                 <picker-table-cell ng-repeat="day in ::week"
                   selected="picker.isSelectedDate(day)"
                   secondary="!picker.isCurrentMonth(day)"
+                  disabled="!picker.isWithinBounds(day)"
                   ng-click="picker.setDate(day)"
                   >
                   {{::day.getDate()}}
@@ -143,7 +156,6 @@ export function DatePickerDirective() {
           </div>
         </picker-content>
 
-        <picker-button class="picker-flex picker-button-primary" ng-click="picker.nextMonth()">+</picker-button>
 
         <picker-footer>
           <picker-button

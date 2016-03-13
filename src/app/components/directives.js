@@ -38,7 +38,7 @@ export function pickerDisplay(){
     restrict: 'E',
     replace: true,
     transclude: true,
-    template: `<div class="picker-display picker-flex" ng-transclude></div>`
+    template: `<div class="picker-display" ng-transclude></div>`
   };
 }
 
@@ -91,7 +91,8 @@ export function pickerTableCell(){
     restrict: 'E',
     scope: {
       selected: '=?',
-      secondary: '=?'
+      secondary: '=?',
+      disabled: '=?'
     },
     replace: true,
     transclude: true,
@@ -99,7 +100,8 @@ export function pickerTableCell(){
       <div class="picker-table-cell"
         ng-class="{
           'picker-table-cell-selected' : selected,
-          'picker-table-cell-secondary' : secondary
+          'picker-table-cell-secondary' : secondary,
+          'picker-table-cell-disabled' : disabled
         }">
         <div class="picker-table-cell-content">
           <div class="picker-table-cell-inner-content"  ng-transclude></div>

@@ -1,7 +1,7 @@
 const TEMPLATE = `
-<div class="date-picker-dialog-container">
-  <div class="date-picker-dialog-overlay" ng-click="cancelDialog()"></div>
-  <div class="date-picker-dialog">
+<div class="picker-dialog-container">
+  <div class="picker-dialog-overlay" ng-click="cancelDialog()"></div>
+  <div class="picker-dialog">
     {{PARTIAL}}
   </div>
 </div>
