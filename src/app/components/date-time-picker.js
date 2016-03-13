@@ -28,5 +28,5 @@ export function DateTimePickerDirective() {
         <picker-footer></picker-footer>
       </div>
     `
-  }
+  };
 }

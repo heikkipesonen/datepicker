@@ -23,7 +23,7 @@ export class DatePickerCalendarController {
         model.setDate(1);
 
     let getWeek = () => Array(7).fill(false);
-    let month = Array(6).fill(false).map((week) => {
+    let month = Array(6).fill(false).map(() => {
       return getWeek();
     });
 
@@ -37,7 +37,6 @@ export class DatePickerCalendarController {
       firstWeekDayIndexOfMonth--;
     }
 
-
     while (currentWeek < month.length){
       let currentDay = model.getDay();
       month[currentWeek][DAY_ORDER[currentDay]] = new Date(model.getTime());
@@ -46,7 +45,6 @@ export class DatePickerCalendarController {
       }
       model.setDate(model.getDate() + 1);
     }
-
 
     return month;
   }
@@ -117,5 +115,5 @@ export function DatePickerCalendarDirective() {
       </picker-content>
     </div>
     `
-  }
+  };
 }
