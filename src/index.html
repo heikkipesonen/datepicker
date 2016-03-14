@@ -24,13 +24,21 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
   <div ng-controller="MainController" class="view">
-    <div class="date-time-picker" style="display:flex">
-      <date-picker ng-model="pickerModel" style="margin-left: 50px"></date-picker>
-      <time-picker ng-model="pickerModel" style="margin-left: 50px"></time-picker>
-      <date-time-picker ng-model="pickerModel" style="margin-left: 50px"></date-time-picker>
-    </div>
     <button ng-click="pickDate()">TIME</button>
     <button ng-click="pickTime()">DATE</button>
+    <div class="date-time-picker" style="display:flex">
+      <div>
+        <date-picker ng-model="pickerModel" style="margin-left: 50px"></date-picker>
+      </div>
+
+      <div>
+        <time-picker ng-model="pickerModel" style="margin-left: 50px"></time-picker>
+      </div>
+
+      <div>
+        <date-time-picker ng-model="pickerModel" style="margin-left: 50px"></date-time-picker>
+      </div>
+    </div>
   </div>
 
 

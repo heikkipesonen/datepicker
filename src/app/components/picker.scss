@@ -22,9 +22,10 @@ $picker-day-name-cell-height: 30px !default;
 .picker-container{
   width: 300px;
   min-width: 300px;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+
+  box-sizing: border-box;
   background-color: $picker-background;
   box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.2);
   position: relative;

@@ -31,6 +31,11 @@ export class DatePickerCalendarController {
     let firstWeekDayIndexOfMonth = DAY_ORDER[model.getDay()];
     let fillModel = new Date(model.getTime());
 
+    if (firstWeekDayIndexOfMonth === 0){
+      currentWeek = 1;
+      firstWeekDayIndexOfMonth = 6;
+    }
+
     while (firstWeekDayIndexOfMonth >= 0){
       fillModel.setDate(fillModel.getDate()-1);
       month[0][DAY_ORDER[fillModel.getDay()]] = new Date(fillModel.getTime());
