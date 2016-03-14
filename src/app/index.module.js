@@ -17,15 +17,8 @@ angular.module('DatePicker', ['ngAnimate'])
   .directive('timePickerTable', TimePickerTableDirective)
   .directive('dateTimePicker', DateTimePickerDirective)
 
-  .directive('pickerTitle', picker.pickerTitle)
-  .directive('pickerFooter', picker.pickerFooter)
-  .directive('pickerButton', picker.pickerButton)
-  .directive('pickerDisplay', picker.pickerDisplay)
-  .directive('pickerContent', picker.pickerContent)
-  .directive('pickerSection', picker.pickerSection)
   .directive('pickerTable', picker.pickerTable)
   .directive('pickerTableHeader', picker.pickerTableHeader)
   .directive('pickerTableRow', picker.pickerTableRow)
   .directive('pickerTableCell', picker.pickerTableCell)
-  .directive('pickerSubtitle', picker.pickerSubtitle)
-  .directive('pickerContainer', picker.pickerContainer);
+  .directive('pickerSubtitle', picker.pickerSubtitle);

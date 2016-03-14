@@ -45,6 +45,8 @@ $picker-day-name-cell-height: 30px !default;
   }
 
   .picker-footer{
+    display: flex;
+    flex-direction: row;
     height: $picker-footer-size;
     color: $picker-footer-bar-color;
     background-color: $picker-footer-bar-background;

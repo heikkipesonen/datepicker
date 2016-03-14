@@ -91,8 +91,7 @@ export function DatePickerCalendarDirective() {
     bindToController: true,
     controllerAs: 'calendar',
     template: `
-    <div>
-      <picker-content ng-class="calendar.direction" class="picker-calendar">
+      <div class="picker-calendar picker-content" ng-class="calendar.direction">
         <div class="picker-table-wrapper" ng-repeat="month in calendar.month">
           <picker-table>
             <picker-table-header>
@@ -112,8 +111,7 @@ export function DatePickerCalendarDirective() {
             </picker-table-row>
           </picker-table>
         </div>
-      </picker-content>
-    </div>
+      </div>
     `
   };
 }

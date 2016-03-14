@@ -56,8 +56,7 @@ export function TimePickerTableDirective() {
     controllerAs: 'time',
     bindToController: true,
     template: `
-    <div>
-      <picker-content>
+      <div class="picker-content">
         <picker-subtitle>
           {{time.hoursLabel ||  'hours'}}
         </picker-subtitle>
@@ -84,7 +83,7 @@ export function TimePickerTableDirective() {
             </picker-table-cell>
           </picker-table-row>
         </picker-table>
-      </pickertcontent>
-    </div>`
+      </div>
+      `
   };
 }

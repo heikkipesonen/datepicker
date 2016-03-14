@@ -40,27 +40,25 @@ export function DatePickerDirective() {
     controllerAs: 'picker',
     require: 'ngModel',
     template: `
-    <div>
-      <picker-container class="date-picker">
-        <picker-title class="picker-column">
-          <picker-button ng-click="picker.prevMonth()">-</picker-button>
-          <picker-display>{{picker.ngModel | date : picker.displayFormat || 'dd.MM.yyyy'}}</picker-display>
-          <picker-button ng-click="picker.nextMonth()">+</picker-button>
-        </picker-title>
+      <div class="picker-container date-picker">
+        <div class="picker-title picker-column">
+          <button class="picker-button" ng-click="picker.prevMonth()">-</button>
+          <div class="picker-display">{{picker.ngModel | date : picker.displayFormat || 'dd.MM.yyyy'}}</div>
+          <button class="picker-button" ng-click="picker.nextMonth()">+</button>
+        </div>
         <date-picker-calendar ng-model="picker.ngModel" max-date="picker.maxDate" min-date="picker.minDate"></date-picker-calendar>
-        <picker-footer>
-          <picker-button
+        <div class="picker-footer">
+          <button class="picker-button"
             ng-click="picker.cancel({date: picker.ngModel})">
             {{picker.labelCancel || 'cancel'}}
-          </picker-button>
+          </button>
           <span class="picker-flex"></span>
-          <picker-button
+          <button class="picker-button"
             ng-click="picker.complete({date: picker.ngModel})">
             {{picker.labelComplete || 'complete'}}
-          </picker-button>
-        </picker-footer>
-      </picker-container>
-    </div>
+          </button>
+        </div>
+      </div>
     `
   };
 }
